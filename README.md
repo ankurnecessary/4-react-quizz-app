@@ -39,3 +39,9 @@ const storedPlaces = storedIds.map((id) => {
   return AVAILABLE_PLACES.find((place) => place.id === id);
 });
 ```
+
+A way of shuffling the array elements.
+
+``` Javascript
+shuffledAnswers.sort(() => Math.random() - 0.5);
+```
