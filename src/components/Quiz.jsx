@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import QUESTIONS from '../questions';
+
 /**
  * A component to show the quiz
  *
@@ -8,6 +9,8 @@ import QUESTIONS from '../questions';
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
   const activeQuestionIndex = userAnswers.length;
+  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
+  shuffledAnswers.sort(() => Math.random() - 0.5);
 
   /**
    * To handle the selection of answers
@@ -23,7 +26,7 @@ export default function Quiz() {
       <div id="question">
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul>
-          {QUESTIONS[activeQuestionIndex].answers.map((answer) => (
+          {shuffledAnswers.map((answer) => (
             <li key={answer} className="answer">
               <button onClick={() => handleSelectAnswer(answer)}>
                 {answer}
