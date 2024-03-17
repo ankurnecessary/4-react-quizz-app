@@ -26,10 +26,16 @@ Working with:
 20. useCallback() - Whenever we wrap any function inside the useCallback() it stops getting recreated again and again when a component rerenders, if the dependency array is blank. If not then the function in useCallback() will be recreated when the value of any of the dependency change.
 21. In the dependency array of useEffect() and useCallback() function we put props, state variables or other functions that are dependent on the state variables like context values and other functions. You will not add the state updating function of useState() directly.
 22. useState()'s state updating function never gets recreated again in react. So, we need not pass it as a dependency in useCallback() or useEffect().
+23. We have to add **variables related to derived state** as dependencies in useCallback() and useEffect().
+24. ***We should avoid or at least minimize the usage of useEffect() in our application as a best practice.***
+25. useRef() value doesn't change when component function renders again and again and......
+26. 
 
 [Eslint configuration - Best linting configuration is to use "format on save" and don't use "formatting option of ES Lint"](https://www.udemy.com/course/react-the-complete-guide-incl-redux/learn/lecture/8231814#questions/20789494)
 
 [This link helps in setting up the most important rule that will help in highlighting the unused variables and highlighting the undeclared variable usage](https://www.dhiwise.com/post/essential-eslint-rules-for-react#1-react-jsx-uses-react-)
+
+[To show errors for unused variables / undeclared variables via eslint](https://eslint.org/docs/latest/rules/no-undef)
 
 [Refs vs State Values](https://www.udemy.com/course/react-the-complete-guide-incl-redux/learn/lecture/39836310#questions)
 
