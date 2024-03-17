@@ -1,40 +1,71 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import QuestionTimer from './QuestionTimer';
 import Answers from './Answers';
+import QUESTIONS from '../questions';
 /**
  * A component function to show a quiz question and its answer options
  *
  * @return {JSX.Element}
  */
 function Question({
-  questionText,
-  answers,
+  index,
   onSelectAnswer,
-  selectedAnswer,
-  answerState,
   onSkipAnswer,
 }) {
+  const [answer, setAnswer] = useState({
+    selectedAnswer: '',
+    isCorrect: null,
+  });
+
+  /**
+   * To handle user answer selection
+   *
+   * @param {string} answer
+   */
+  function handleSelectAnswer(answer) {
+    setAnswer({
+      selectedAnswer: answer,
+      isCorrect: null,
+    });
+
+    setTimeout(() => {
+      setAnswer({
+        selectedAnswer: answer,
+        isCorrect: answer === QUESTIONS[index].answers[0],
+      });
+
+      setTimeout(() => {
+        onSelectAnswer(answer);
+      }, 2000);
+    }, 1000);
+  }
+
+  let answerState = '';
+
+  if (answer.selectedAnswer && answer.isCorrect !== null) {
+    answerState = answer.isCorrect ? 'correct' : 'wrong';
+  } else if (answer.selectedAnswer) {
+    answerState = 'answered';
+  }
+
   return (
     <div id="question">
       <QuestionTimer timeOut={10000} onTimeOut={onSkipAnswer} />
-      <h2>{questionText}</h2>
+      <h2>{QUESTIONS[index].text}</h2>
       <Answers
-        answers={answers}
+        answers={QUESTIONS[index].answers}
         answerState={answerState}
-        selectedAnswer={selectedAnswer}
-        onSelect={onSelectAnswer}
+        selectedAnswer={answer.selectedAnswer}
+        onSelect={handleSelectAnswer}
       />
     </div>
   );
 }
 
 Question.propTypes = {
-  questionText: PropTypes.string,
-  answers: PropTypes.array,
+  index: PropTypes.number,
   onSelectAnswer: PropTypes.func,
-  selectedAnswer: PropTypes.string,
-  answerState: PropTypes.string,
   onSkipAnswer: PropTypes.func,
 };
 
