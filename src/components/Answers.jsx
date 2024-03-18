@@ -13,7 +13,7 @@ function Answers({answers, selectedAnswer, answerState, onSelect}) {
   }
   return (
     <ul>
-      {answers.map((answer) => {
+      {shuffledAnswers.current.map((answer) => {
         const isSelected = answer === selectedAnswer;
         let cssClass = '';
 

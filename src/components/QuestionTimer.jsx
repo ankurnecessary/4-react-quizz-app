@@ -6,7 +6,7 @@ import React, {useEffect, useState} from 'react';
  *
  * @return {JSX.Element}
  */
-function QuestionTimer({timeOut, onTimeOut}) {
+function QuestionTimer({timeOut, onTimeOut, mode}) {
   const [remainingTime, setRemainingTime] = useState(timeOut);
 
   useEffect(() => {
@@ -29,12 +29,20 @@ function QuestionTimer({timeOut, onTimeOut}) {
     };
   }, []);
 
-  return <progress id='question-time' max={timeOut} value={remainingTime} />;
+  return (
+    <progress
+      id="question-time"
+      max={timeOut}
+      value={remainingTime}
+      className={mode}
+    />
+  );
 }
 
 QuestionTimer.propTypes = {
   timeOut: PropTypes.number,
   onTimeOut: PropTypes.func,
+  mode: PropTypes.string,
 };
 
 export default QuestionTimer;

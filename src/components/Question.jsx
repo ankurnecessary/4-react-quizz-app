@@ -8,15 +8,21 @@ import QUESTIONS from '../questions';
  *
  * @return {JSX.Element}
  */
-function Question({
-  index,
-  onSelectAnswer,
-  onSkipAnswer,
-}) {
+function Question({index, onSelectAnswer, onSkipAnswer}) {
   const [answer, setAnswer] = useState({
     selectedAnswer: '',
     isCorrect: null,
   });
+
+  let timer = 10000;
+
+  if (answer.selectedAnswer) {
+    timer = 1000;
+  }
+
+  if (answer.isCorrect) {
+    timer = 2000;
+  }
 
   /**
    * To handle user answer selection
@@ -51,7 +57,12 @@ function Question({
 
   return (
     <div id="question">
-      <QuestionTimer timeOut={10000} onTimeOut={onSkipAnswer} />
+      <QuestionTimer
+        key={timer}
+        timeOut={timer}
+        onTimeOut={answer.selectedAnswer === '' ? onSkipAnswer : null}
+        mode={answerState}
+      />
       <h2>{QUESTIONS[index].text}</h2>
       <Answers
         answers={QUESTIONS[index].answers}
