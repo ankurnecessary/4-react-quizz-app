@@ -30,6 +30,7 @@ Working with:
 24. ***We should avoid or at least minimize the usage of useEffect() in our application as a best practice.***
 25. useRef() value doesn't change when component function renders again and again and......
 26. If we have multiple components having **key** attribute with them and all of them belong to same entity then we should consider making a separate component for that entity and use **key** attribute over it.
+27. We as a developer cannot consume key prop. It is exclusively for the react.
 
 [Eslint configuration - Best linting configuration is to use "format on save" and don't use "formatting option of ES Lint"](https://www.udemy.com/course/react-the-complete-guide-incl-redux/learn/lecture/8231814#questions/20789494)
 
